@@ -12,25 +12,20 @@ add_path () {
         esac
     done
 }
-add_path $HOME/.cargo/bin
-
-#export PATH="~/bin:$PATH"
+# add_path $HOME/.cargo/bin
+# export PATH="~/bin:$PATH"
 
 # for git instruction auto completion
+# ref: https://github.com/git/git/tree/master/contrib/completion
 if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
 
 # Enable bash completion in interactive shells.
-if ! shopt -oq posix; then
-    if [ -f /usr/share/bash-completion/bash_completion ]; then
-        . /usr/share/bash-completion/bash_completion
-    elif [ -f /etc/bash_completion ]; then
-        . /etc/bash_completion
-    elif [ -n $"(type -p brew)" ] && [ -f $(brew --prefix)/etc/bash_completion ]; then
-        . $(brew --prefix)/etc/bash_completion
-    fi
-fi
+# ref: https://github.com/scop/bash-completion
+export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+
 
 # Make the terminal more colorful.
 if [ "$TERM" == "xterm" ]; then
@@ -44,7 +39,6 @@ else
     alias h='ls --color=auto -F'
 fi
 
-alias ls='ls -GFh'
 export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
