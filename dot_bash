@@ -3,6 +3,9 @@ if [ -f ~/.bashrc ]; then
     source ~/.bashrc
 fi
 
+# Let iterm2 read bash_profile
+export BASH_CONF="bash_profile"
+
 # http://unix.stackexchange.com/a/4973
 add_path () {
     for d; do
@@ -13,7 +16,6 @@ add_path () {
     done
 }
 # add_path $HOME/.cargo/bin
-# export PATH="~/bin:$PATH"
 
 # for git instruction auto completion
 # ref: https://github.com/git/git/tree/master/contrib/completion
@@ -34,15 +36,18 @@ fi
 
 # Let ls shows colors
 if [ "$(uname)" == "Darwin" ]; then
-    alias h='ls -GF'
+    alias h='ls -GFh'
 else
     alias h='ls --color=auto -F'
 fi
 
 export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
 export CLICOLOR=1
-export LSCOLORS=ExFxBxDxCxegedabagacad
+# export LSCOLORS=ExFxBxDxCxegedabagacad
+export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
+
+# Tell grep to highlight matches
+export GREP_OPTIONS='--color=auto'
 
 # for hiding CLI prefix
 # export PS1="\W \$"
-
